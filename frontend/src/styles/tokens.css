@@ -1,0 +1,20 @@
+:root {
+  --navy: #12162b;
+  --accent: #5b5bf0;
+  --accent-2: #7c5cf2;
+  --bg: #f5f6fc;
+  --surface: #fff;
+  --line: #e7e9f3;
+  --text: #141a33;
+  --muted: #7a8199;
+  --ok: #1f9d63;
+  --ok-bg: #e2f6ec;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  font-family: Manrope, Inter, system-ui, sans-serif;
+  color: var(--text);
+}
+* { box-sizing: border-box; margin: 0; }
+body { background: var(--bg); }
+button, input, select { font: inherit; }
