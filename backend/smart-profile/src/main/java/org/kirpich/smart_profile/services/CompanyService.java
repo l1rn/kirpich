@@ -6,6 +6,7 @@ import org.kirpich.smart_profile.dto.application.ApplicationResponse;
 import org.kirpich.smart_profile.dto.company.ChangeCompanyRequest;
 import org.kirpich.smart_profile.dto.company.CompanyResponse;
 import org.kirpich.smart_profile.dto.company.CreateCompanyRequest;
+import org.kirpich.smart_profile.exceptions.UserHasNoCompanyException;
 import org.kirpich.smart_profile.models.Application;
 import org.kirpich.smart_profile.models.Company;
 import org.kirpich.smart_profile.models.User;
@@ -63,7 +64,11 @@ public class CompanyService {
     public CompanyResponse getMyCompany(String email) throws CredentialNotFoundException{
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new CredentialNotFoundException("Пользователь с таким email не найден"));
-        Company company = companyRepository.findByOwner(user);
+        Company company = companyRepository.findByOwner(user)
+                .orElse(null);
+        if(company == null){
+            return null;
+        }
         return new CompanyResponse(
                 company.getName(),
                 company.getInn(),
