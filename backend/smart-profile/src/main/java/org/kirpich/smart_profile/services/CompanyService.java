@@ -60,9 +60,22 @@ public class CompanyService {
         );
     }
 
+    public CompanyResponse getMyCompany(String email) throws CredentialNotFoundException{
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new CredentialNotFoundException("Пользователь с таким email не найден"));
+        Company company = companyRepository.findByOwner(user);
+        return new CompanyResponse(
+                company.getName(),
+                company.getInn(),
+                company.getOgrn(),
+                company.getLegalAddress(),
+                company.getRevenue()
+        );
+    }
+
     @Transactional
-    public void changeCompany(ChangeCompanyRequest request) throws CredentialNotFoundException {
-        User user = userRepository.findById(request.getOwnerId())
+    public void changeCompany(ChangeCompanyRequest request, String email) throws CredentialNotFoundException {
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new CredentialNotFoundException("Пользователь с таким email не найден"));
 
         Company company = companyRepository.findById(request.getId())

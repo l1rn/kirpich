@@ -5,6 +5,8 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.kirpich.smart_profile.enums.ApplicationStatus;
 
+import java.time.LocalDateTime;
+
 
 @Table(name="applications")
 @Entity
@@ -19,13 +21,23 @@ public class Application {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "companyId")
+    @JoinColumn(name = "company_id")
     private Company company;
 
     @ManyToOne
-    @JoinColumn(name = "verificationId")
+    @JoinColumn(name = "verification_id")
     private Verification verification;
 
+    @ManyToOne
+    @JoinColumn(name = "credit_product_id")
+    private CreditProduct creditProduct;
+
+    private Long requestedAmount;
+    private Integer termMonths;
+
+    @Enumerated(EnumType.STRING)
     private ApplicationStatus status;
 
+    @Builder.Default
+    private LocalDateTime createdAt = LocalDateTime.now();
 }

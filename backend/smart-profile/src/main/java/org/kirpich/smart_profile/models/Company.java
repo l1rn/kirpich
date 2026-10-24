@@ -21,6 +21,6 @@ public class Company {
     private String legalAddress;
     private Long revenue;
     @OneToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     private User owner;
 }

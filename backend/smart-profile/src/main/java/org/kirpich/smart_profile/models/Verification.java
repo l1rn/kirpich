@@ -30,5 +30,6 @@ public class Verification {
     private FinalVerdict finalVerdict;
 
     private LocalDateTime issueDate;
-    private Integer creditProductId;
+    @Column(length = 1000)
+    private String reasons;
 }

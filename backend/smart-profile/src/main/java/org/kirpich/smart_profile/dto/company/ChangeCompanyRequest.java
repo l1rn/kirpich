@@ -10,5 +10,4 @@ public class ChangeCompanyRequest {
     private String ogrn;
     private String legalAddress;
     private Long revenue;
-    private Integer ownerId;
 }
