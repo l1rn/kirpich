@@ -3,5 +3,9 @@
 </template>
 
 <style scoped>
-.logo { font-size: 28px; font-weight: 800; color: #fff; }
+.logo { 
+  font-size: 28px; 
+  font-weight: 800; 
+  color: #fff; 
+}
 </style>

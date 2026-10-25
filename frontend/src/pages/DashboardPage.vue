@@ -18,6 +18,13 @@ import ProductsSection from '../components/organisms/ProductsSection.vue'
 </template>
 
 <style scoped>
-h1 { font-size: 22px; }
-header p { font-size: 13px; color: var(--muted); margin-top: 6px; }
+h1 { 
+  font-size: 22px; 
+}
+
+header p { 
+  font-size: 13px; 
+  color: var(--muted); 
+  margin-top: 6px; 
+}
 </style>

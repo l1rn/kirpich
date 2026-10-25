@@ -10,6 +10,13 @@ defineProps<{ label: string }>()
 </template>
 
 <style scoped>
-.field { display: grid; gap: 6px; }
-.label { font-size: 13px; color: var(--muted); }
+.field { 
+  display: grid; 
+  gap: 6px; 
+}
+
+.label { 
+  font-size: 13px; 
+  color: var(--muted); 
+}
 </style>

@@ -10,6 +10,16 @@ import SidebarNav from '../organisms/SidebarNav.vue'
 </template>
 
 <style scoped>
-.layout { display: flex; }
-.main { flex: 1; padding: 32px; display: grid; gap: 28px; align-content: start; max-width: 860px; }
+.layout { 
+  display: flex; 
+}
+
+.main { 
+  flex: 1; 
+  padding: 32px; 
+  display: grid; 
+  gap: 28px; 
+  align-content: start; 
+  max-width: 860px; 
+}
 </style>
