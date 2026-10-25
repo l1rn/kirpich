@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.kirpich.smart_profile.services.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -52,7 +53,7 @@ public class SecurityConfig {
                 csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration corsConfiguration = new CorsConfiguration();
-                    corsConfiguration.setAllowedOrigins(List.of("http://localhost:8081",
+                    corsConfiguration.setAllowedOrigins(List.of("http://localhost:5173",
                             "http://localhost",
                             "http://localhost:80",
                             "http://localhost:8080"));
@@ -76,7 +77,20 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/h2-console/**",
                                 "/api/auth/**"
-                        ).permitAll().anyRequest().authenticated())
+                        ).permitAll()
+                        .requestMatchers(
+                                HttpMethod.GET, "/api/credit-products/**"
+                        ).permitAll()
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/credit-products/*"
+                        ).hasRole("ADMIN")
+                        .requestMatchers(
+                                "/api/applications/**",
+                                "/api/companies/**",
+                                "/api/users/**"
+                        ).authenticated()
+                        .anyRequest().authenticated())
                 .anonymous(AbstractHttpConfigurer::disable)
                 .sessionManagement(m ->
                         m.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

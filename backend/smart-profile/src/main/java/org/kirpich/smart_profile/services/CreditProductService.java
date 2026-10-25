@@ -29,6 +29,13 @@ public class CreditProductService {
         creditProductRepository.save(creditProduct);
     }
 
+    public CreditProductResponse getCreditProduct(Integer id){
+        return creditProductRepository.findById(id)
+                .filter(CreditProduct::getActive)
+                .map(CreditProductResponse::from)
+                .orElseThrow(() -> new IllegalArgumentException("Продукт не найден"));
+    }
+
     public PaginatedResponse<CreditProductResponse> getCreditProducts(Pageable p){
         Page<CreditProduct> creditProducts = creditProductRepository.findAllPageable(p);
 

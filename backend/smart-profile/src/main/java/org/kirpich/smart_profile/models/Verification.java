@@ -30,6 +30,7 @@ public class Verification {
     private FinalVerdict finalVerdict;
 
     private LocalDateTime issueDate;
+
     @Column(length = 1000)
     private String reasons;
 }

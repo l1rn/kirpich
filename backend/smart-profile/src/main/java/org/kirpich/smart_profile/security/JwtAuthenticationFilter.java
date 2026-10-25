@@ -12,6 +12,7 @@ import org.kirpich.smart_profile.services.UserDetailsServiceImpl;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -35,32 +36,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
-        try{
-            String jwt = parseJwt(request);
-            if (jwt == null){
-                filterChain.doFilter(request, response);
-                return;
+        String jwt = parseJwt(request);
+        if (jwt != null && jwtService.validateToken(jwt)) {
+            try {
+                UserDetails ud = userDetailsService.loadUserByUsername(jwtService.getUsernameFromToken(jwt));
+                var auth = new UsernamePasswordAuthenticationToken(ud, null, ud.getAuthorities());
+                auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(auth);
+            } catch (UsernameNotFoundException e) {
+                SecurityContextHolder.clearContext();
             }
-            if(!jwtService.validateToken(jwt)){
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-                return;
-            }
-
-            String email = jwtService.getUsernameFromToken(jwt);
-            UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                    userDetails,
-                    null,
-                    userDetails.getAuthorities()
-            );
-
-            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        } catch (Exception e){
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-            logger.error("Ошибка аутентификации: ", e);
-            return;
         }
         filterChain.doFilter(request, response);
     }

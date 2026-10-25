@@ -27,7 +27,7 @@ public class AuthorizationService {
 
     public void signUp(AuthorizationRequest r) throws BadRequestException, CredentialNotFoundException {
         if(userRepository.findByEmail(r.getEmail()).isPresent()){
-            throw new CredentialNotFoundException("email или пароль неверны");
+            throw new CredentialNotFoundException("Пользователь с таким email уже существует");
         }
         if(r.getPassword().length() < 6){
             throw new BadRequestException("Пароль слишком маленький (нужен пароль > 6)");
@@ -42,7 +42,6 @@ public class AuthorizationService {
         userRepository.save(user);
     }
 
-    @Transactional
     public String signIn(AuthorizationRequest r) throws CredentialNotFoundException{
         try {
             authenticationManager.authenticate(
@@ -57,8 +56,6 @@ public class AuthorizationService {
         if(!passwordEncoder.matches(r.getPassword(), user.getPassword())){
             throw new CredentialNotFoundException("email или пароль неверны");
         }
-
-
 
         return jwtService.generateAccessToken(user);
     }
