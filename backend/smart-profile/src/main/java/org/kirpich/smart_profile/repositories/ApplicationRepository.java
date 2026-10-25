@@ -15,5 +15,5 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
     @Query("select a from Application a")
     Page<Application> findAllPageable(Pageable pageable);
 
-    Page<Application> findAllByCompany_Owner(User companyOwner, Pageable pageable);
+    Page<Application> findAllByCompany_Owner_Email(String companyOwnerEmail, Pageable pageable);
 }

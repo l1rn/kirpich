@@ -1,29 +1,34 @@
 package org.kirpich.smart_profile.dto.application;
 
-import org.kirpich.smart_profile.enums.ApplicationStatus;
-import org.kirpich.smart_profile.enums.BkiStatus;
-import org.kirpich.smart_profile.enums.EgrulStatus;
-import org.kirpich.smart_profile.enums.FinalVerdict;
 import org.kirpich.smart_profile.models.Application;
+import org.kirpich.smart_profile.models.Verification;
+
+import java.time.LocalDateTime;
 
 public record ApplicationResponse(
         Long id,
+        String status,
         String companyName,
-        String companyLegalAddress,
-        String egrulStatus,
+        String productTitle,
+        Long requestedAmount,
+        Integer termMonths,
         String bkiStatus,
-        String finalVerdict,
-        String reasons
-) {
-    public static ApplicationResponse from(Application application){
+        String egrulStatus,
+        String reasons,
+        LocalDateTime createdAt) {
+
+    public static ApplicationResponse from(Application a) {
+        Verification v = a.getVerification();
         return new ApplicationResponse(
-                application.getId(),
-                application.getCompany().getName(),
-                application.getCompany().getLegalAddress(),
-                application.getVerification().getEgrulStatus().name(),
-                application.getVerification().getBkiStatus().name(),
-                application.getVerification().getFinalVerdict().name(),
-                application.getVerification().getReasons()
-        );
+                a.getId(),
+                a.getStatus().name(),
+                a.getCompany().getName(),
+                a.getCreditProduct().getTitle(),
+                a.getRequestedAmount(),
+                a.getTermMonths(),
+                v.getBkiStatus().name(),
+                v.getEgrulStatus().name(),
+                v.getReasons(),
+                a.getCreatedAt());
     }
 }

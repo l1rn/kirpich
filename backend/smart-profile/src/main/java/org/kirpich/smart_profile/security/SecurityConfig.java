@@ -75,23 +75,30 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(r -> r
                         .requestMatchers(
+                                "/error",
                                 "/h2-console/**",
-                                "/api/auth/**"
+                                "/api/auth/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/v3/api-docs/**"
                         ).permitAll()
+
                         .requestMatchers(
                                 HttpMethod.GET, "/api/credit-products/**"
                         ).permitAll()
+
                         .requestMatchers(
                                 HttpMethod.POST,
                                 "/api/credit-products/*"
                         ).hasRole("ADMIN")
+
                         .requestMatchers(
                                 "/api/applications/**",
                                 "/api/companies/**",
                                 "/api/users/**"
                         ).authenticated()
+
                         .anyRequest().authenticated())
-                .anonymous(AbstractHttpConfigurer::disable)
                 .sessionManagement(m ->
                         m.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())

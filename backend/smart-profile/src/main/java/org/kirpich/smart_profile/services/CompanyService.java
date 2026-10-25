@@ -26,10 +26,12 @@ public class CompanyService {
     private final UserRepository userRepository;
     private final CompanyRepository companyRepository;
 
-    public void createCompany(CreateCompanyRequest request, String email) throws CredentialNotFoundException {
+    public void createCompany(CreateCompanyRequest request, String email) throws CredentialNotFoundException, IllegalAccessException {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new CredentialNotFoundException("Пользователь с таким email не найден"));
-
+        if(companyRepository.findByOwner_Email(email).isPresent()){
+            throw new IllegalAccessException("Компания уже создана");
+        }
         Company company = Company.builder()
                 .name(request.getName())
                 .inn(request.getInn())
@@ -80,17 +82,13 @@ public class CompanyService {
 
     @Transactional
     public void changeCompany(ChangeCompanyRequest request, String email) throws CredentialNotFoundException {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new CredentialNotFoundException("Пользователь с таким email не найден"));
-
-        Company company = companyRepository.findById(request.getId())
+        Company company = companyRepository.findByOwner_Email(email)
                 .orElseThrow(() -> new RuntimeException("Компания с таким id не найдена"));
 
         company.setName(request.getName());
         company.setInn(request.getInn());
         company.setLegalAddress(request.getLegalAddress());
         company.setOgrn(request.getOgrn());
-        company.setOwner(user);
         company.setRevenue(request.getRevenue());
 
         companyRepository.save(company);

@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class ChangeCompanyRequest {
-    private Integer id;
     private String name;
     private String inn;
     private String ogrn;

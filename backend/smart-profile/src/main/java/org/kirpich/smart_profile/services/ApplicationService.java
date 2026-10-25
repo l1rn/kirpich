@@ -60,21 +60,10 @@ public class ApplicationService {
     }
 
     public PaginatedResponse<ApplicationResponse> getMyApplicationList(String email, Pageable p) throws CredentialNotFoundException{
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new CredentialNotFoundException("Пользователь с таким email не найден"));
-
-        Page<Application> applications = applicationRepository.findAllByCompany_Owner(user, p);
-        List<ApplicationResponse> content = applications.stream()
-                .map(ApplicationResponse::from)
-                .toList();
-
+        Page<Application> page = applicationRepository.findAllByCompany_Owner_Email(email, p);
         return new PaginatedResponse<>(
-                content,
-                applications.getNumber(),
-                applications.getSize(),
-                applications.getTotalElements(),
-                applications.getTotalPages()
-        );
+                page.stream().map(ApplicationResponse::from).toList(),
+                page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages());
     }
 
     public PaginatedResponse<ApplicationResponse> getApplicationList(Pageable p){

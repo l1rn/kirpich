@@ -35,7 +35,7 @@ public class ApplicationController {
         }
     }
 
-    @GetMapping("/my")
+    @GetMapping("/my-history")
     public ResponseEntity<?> my(@AuthenticationPrincipal UserDetails userDetails, Pageable p){
         try {
             return ResponseEntity.ok(applicationService.getMyApplicationList(userDetails.getUsername(), p));

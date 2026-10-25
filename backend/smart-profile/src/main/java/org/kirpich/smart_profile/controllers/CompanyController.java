@@ -27,7 +27,10 @@ public class CompanyController {
         try{
             companyService.createCompany(request, userDetails.getUsername());
             return ResponseEntity.ok("OK");
-        } catch (CredentialNotFoundException e) {
+        } catch (IllegalAccessException e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
+        catch (CredentialNotFoundException e) {
             return ResponseEntity.status(403).body(e.getMessage());
         } catch (RuntimeException e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
@@ -60,7 +63,7 @@ public class CompanyController {
         }
     }
 
-    @GetMapping("/my")
+    @GetMapping("/my-company")
     public ResponseEntity<?> getMyCompany(@AuthenticationPrincipal UserDetails userDetails){
         try{
             return ResponseEntity.ok(companyService.getMyCompany(userDetails.getUsername()));
