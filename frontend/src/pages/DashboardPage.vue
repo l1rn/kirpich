@@ -4,6 +4,7 @@ import PromoBanner from '../components/organisms/PromoBanner.vue'
 import ApplicationsSection from '../components/organisms/ApplicationsSection.vue'
 import ProductsSection from '../components/organisms/ProductsSection.vue'
 import { useAuthStore } from '@/stores/authStore.ts'
+import JourneyRoadmap from '@/components/organisms/JourneyRoadmap.vue'
 
 const auth = useAuthStore();
 </script>
@@ -17,6 +18,7 @@ const auth = useAuthStore();
     <PromoBanner />
     <ApplicationsSection v-if="auth.isLoggedIn" />
     <ProductsSection />
+    <JourneyRoadmap />
   </DashboardTemplate>
 </template>
 
