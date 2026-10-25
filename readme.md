@@ -99,7 +99,10 @@ npm run dev
 ```
 
 Приложение откроется на `http://localhost:5173`. Адрес API задан в `src/api/api.ts`, клиент работает с `withCredentials: true`, поэтому CORS на бэкенде должен разрешать этот origin.
-
+### Docker 
+```
+docker compose up -d
+```
 ## API
 
 Все пути начинаются с `/api`. Все эндпоинты, кроме публичных, требуют cookie авторизации.
