@@ -7,7 +7,7 @@ const { steps } = useJourney()
 
 <template>
   <ol class="roadmap">
-    <RoadmapStep v-for="(s, i) in steps" :key="s.title" :step="s" :index="i" />
+     <RoadmapStep v-for="(s, i) in steps" :key="s.title" :step="s" :index="i" />
   </ol>
 </template>
 

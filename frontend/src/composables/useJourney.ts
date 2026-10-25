@@ -56,23 +56,23 @@ export function useJourney() {
 
     return [
       {
-        title: 'Аккаунт',
+        title: '👤 Аккаунт',
         hint: auth.isLoggedIn ? 'Вы вошли в кабинет' : 'Нажмите «Войти» или зарегистрируйтесь',
         state: base(0),
       },
       {
-        title: 'Компания',
+        title: '🏢 Компания',
         hint: p > 1 ? 'Данные компании сохранены' : 'Добавьте данные компании',
         state: base(1),
         ...(p === 1 && { to: '/company', action: 'Добавить компанию' }),
       },
       {
-        title: 'Заявка',
+        title: '📝 Заявка',
         hint: p > 2 ? 'Заявка отправлена' : 'Выберите продукт и подайте заявку',
         state: base(2),
         ...(p === 2 && { to: '/credit-products', action: 'Выбрать продукт' }),
       },
-      { title: 'Проверка', hint: verifyHint, state: verifyState, ...verifyLink },
+      { title: '✅ Проверка', hint: verifyHint, state: verifyState, ...verifyLink },
     ]
   })
 
