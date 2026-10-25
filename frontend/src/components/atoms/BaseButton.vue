@@ -6,7 +6,7 @@ defineProps<{ variant?: 'primary' | 'dark' }>()
   <button class="btn" :class="variant ?? 'primary'"><slot /></button>
 </template>
 
-<style scoped>
+<style scoped scss>
 .btn { 
   border: 0; 
   padding: 12px 20px; 
@@ -18,12 +18,16 @@ defineProps<{ variant?: 'primary' | 'dark' }>()
 }
 
 .primary { 
-  background: linear-gradient(90deg, var(--accent), var(--accent-2)); 
+  background: var(--accent); 
 }
 
 .dark { 
   background: var(--navy); 
-  border-radius: 999px; 
+  border-radius: 999px;
+  transition: 0.3s all; 
+  &:hover{
+    background: #1b203d;
+  }
 }
 
 .btn:focus-visible { 

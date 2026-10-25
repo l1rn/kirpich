@@ -11,13 +11,23 @@ export const useAuthStore = defineStore('auth', () => {
 
     const fetchMe = async() => {
         try{
-            const response = await http.post<Me>('/users/me');
+            const response = await http.get<Me>('/users/me');
             user.value = response.data;
         } catch{
             user.value = null;
         } finally{
             loaded.value = true;
         }
+    }
+
+    const login = async(email: string, password: string) => {
+        await http.post('/auth/login', { email, password });
+        await fetchMe();
+    }
+
+    const register = async(email: string, password: string) => {
+        await http.post('/auth/register', { email, password});
+        await login(email, password);
     }
 
     const logout = async() => {
@@ -30,6 +40,8 @@ export const useAuthStore = defineStore('auth', () => {
         loaded,
         isLoggedIn,
         fetchMe,
-        logout
+        register, 
+        login,
+        logout,
     };
 })

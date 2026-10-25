@@ -1,6 +1,6 @@
+import CompanyPage from '@/pages/CompanyPage.vue'
 import CreditProductsPage from '@/pages/CreditProductsPage.vue'
 import DashboardPage from '@/pages/DashboardPage.vue'
-import DocumentsPage from '@/pages/DocumentsPage.vue'
 import NewApplicationPage from '@/pages/NewApplicationPage.vue'
 import ProfilePage from '@/pages/ProfilePage.vue'
 import { useAuthStore } from '@/stores/authStore'
@@ -14,7 +14,7 @@ const router = createRouter({
     { path: '/credit-products', component: CreditProductsPage},
     { path: '/applications/new', component: NewApplicationPage, meta: { requiresAuth: true } },
     { path: '/me', component: ProfilePage, meta: { requiresAuth: true } },
-    { path: '/company', component: DocumentsPage, meta: { requiresAuth: true } }
+    { path: '/company', component: CompanyPage, meta: { requiresAuth: true } }
   ],
 })
 
