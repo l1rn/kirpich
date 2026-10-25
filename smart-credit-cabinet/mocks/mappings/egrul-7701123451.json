@@ -1,0 +1,15 @@
+{
+  "name": "ЕГРЮЛ: ООО «Ромашка». S1: чистая история, крупная выручка — автоодобрение",
+  "priority": 1,
+  "request": {
+    "method": "GET",
+    "urlPath": "/egrul/v1/companies/7701123451"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "bodyFileName": "egrul/7701123451.json"
+  }
+}

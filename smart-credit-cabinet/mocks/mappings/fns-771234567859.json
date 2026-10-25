@@ -1,0 +1,15 @@
+{
+  "name": "ФНС: ИП Петров П. П.",
+  "priority": 1,
+  "request": {
+    "method": "GET",
+    "urlPath": "/fns/v1/business/771234567859"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "bodyFileName": "fns/771234567859.json"
+  }
+}

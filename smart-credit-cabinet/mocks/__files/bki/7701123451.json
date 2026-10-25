@@ -1,0 +1,32 @@
+{
+  "inn": "7701123451",
+  "reportId": "BKI-7701123451-2026",
+  "generatedAt": "2026-10-20",
+  "loans": [
+    {
+      "creditor": "Банк Северный",
+      "type": "Кредит на пополнение оборотных средств",
+      "amount": 2000000,
+      "openedAt": "2025-03-01",
+      "termMonths": 24,
+      "status": "active",
+      "outstanding": 1100000,
+      "monthlyPayment": 105000,
+      "maxOverdueDays12m": 0,
+      "currentOverdueDays": 0
+    },
+    {
+      "creditor": "Банк Северный",
+      "type": "Овердрафт",
+      "amount": 500000,
+      "openedAt": "2022-02-10",
+      "termMonths": 12,
+      "status": "closed",
+      "outstanding": 0,
+      "monthlyPayment": 0,
+      "maxOverdueDays12m": 0,
+      "currentOverdueDays": 0
+    }
+  ],
+  "inquiries30d": 1
+}

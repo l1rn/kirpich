@@ -1,0 +1,13 @@
+{
+  "inn": "7701123451",
+  "taxDebt": false,
+  "taxDebtAmount": 0,
+  "massAddress": false,
+  "massDirector": false,
+  "employees": 34,
+  "taxRegime": "ОСН",
+  "reportedRevenue": {
+    "year": 2025,
+    "amount": 60000000
+  }
+}

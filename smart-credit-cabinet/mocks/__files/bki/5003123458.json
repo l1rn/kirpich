@@ -1,0 +1,32 @@
+{
+  "inn": "5003123458",
+  "reportId": "BKI-5003123458-2026",
+  "generatedAt": "2026-10-20",
+  "loans": [
+    {
+      "creditor": "Банк Центральный",
+      "type": "Кредит на покупку техники",
+      "amount": 9000000,
+      "openedAt": "2024-08-15",
+      "termMonths": 36,
+      "status": "active",
+      "outstanding": 5400000,
+      "monthlyPayment": 300000,
+      "maxOverdueDays12m": 25,
+      "currentOverdueDays": 0
+    },
+    {
+      "creditor": "Банк Центральный",
+      "type": "Кредитная линия",
+      "amount": 3000000,
+      "openedAt": "2021-05-20",
+      "termMonths": 24,
+      "status": "closed",
+      "outstanding": 0,
+      "monthlyPayment": 0,
+      "maxOverdueDays12m": 0,
+      "currentOverdueDays": 0
+    }
+  ],
+  "inquiries30d": 1
+}

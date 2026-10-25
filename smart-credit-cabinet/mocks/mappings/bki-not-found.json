@@ -1,0 +1,18 @@
+{
+  "name": "БКИ: неизвестный ИНН",
+  "priority": 10,
+  "request": {
+    "method": "POST",
+    "urlPath": "/bki/v1/reports"
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "jsonBody": {
+      "error": "not_found",
+      "message": "Сведения не найдены"
+    }
+  }
+}

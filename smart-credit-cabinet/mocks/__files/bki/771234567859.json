@@ -1,0 +1,20 @@
+{
+  "inn": "771234567859",
+  "reportId": "BKI-771234567859-2026",
+  "generatedAt": "2026-10-20",
+  "loans": [
+    {
+      "creditor": "Банк Восход",
+      "type": "Кредит на развитие бизнеса",
+      "amount": 1500000,
+      "openedAt": "2024-06-01",
+      "termMonths": 12,
+      "status": "closed",
+      "outstanding": 0,
+      "monthlyPayment": 0,
+      "maxOverdueDays12m": 0,
+      "currentOverdueDays": 0
+    }
+  ],
+  "inquiries30d": 1
+}

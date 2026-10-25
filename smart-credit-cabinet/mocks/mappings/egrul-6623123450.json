@@ -1,0 +1,15 @@
+{
+  "name": "ЕГРЮЛ: ООО «Тишина». S5: БКИ отвечает дольше таймаута — повторы, затем ручная проверка",
+  "priority": 1,
+  "request": {
+    "method": "GET",
+    "urlPath": "/egrul/v1/companies/6623123450"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "bodyFileName": "egrul/6623123450.json"
+  }
+}

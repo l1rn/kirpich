@@ -1,0 +1,23 @@
+{
+  "name": "БКИ: ООО «СтройМонтаж»",
+  "priority": 1,
+  "request": {
+    "method": "POST",
+    "urlPath": "/bki/v1/reports",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": {
+          "expression": "$.inn",
+          "equalTo": "5003123458"
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "bodyFileName": "bki/5003123458.json"
+  }
+}

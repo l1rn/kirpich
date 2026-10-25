@@ -1,0 +1,15 @@
+{
+  "name": "ФНС: ООО «Тишина»",
+  "priority": 1,
+  "request": {
+    "method": "GET",
+    "urlPath": "/fns/v1/business/6623123450"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "bodyFileName": "fns/6623123450.json"
+  }
+}

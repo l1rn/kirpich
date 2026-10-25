@@ -1,0 +1,15 @@
+{
+  "name": "ФНС: ООО «Ромашка»",
+  "priority": 1,
+  "request": {
+    "method": "GET",
+    "urlPath": "/fns/v1/business/7701123451"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "bodyFileName": "fns/7701123451.json"
+  }
+}

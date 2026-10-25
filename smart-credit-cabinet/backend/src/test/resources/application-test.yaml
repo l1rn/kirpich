@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:credit;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ""
+
+app:
+  jwt:
+    secret: test-secret-only-for-tests-0123456789abcdef
+  pipeline:
+    enabled: false   # тесты двигают конвейер сами через PipelineService.processTick()
+  upload-dir: target/test-uploads
+  seed:
+    enabled: true

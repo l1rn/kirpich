@@ -1,0 +1,24 @@
+{
+  "name": "БКИ: ООО «Тишина» — отвечает дольше таймаута клиента",
+  "priority": 1,
+  "request": {
+    "method": "POST",
+    "urlPath": "/bki/v1/reports",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": {
+          "expression": "$.inn",
+          "equalTo": "6623123450"
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "bodyFileName": "bki/6623123450.json",
+    "fixedDelayMilliseconds": 5000
+  }
+}

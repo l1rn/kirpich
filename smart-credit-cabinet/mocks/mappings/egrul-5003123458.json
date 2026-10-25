@@ -1,0 +1,15 @@
+{
+  "name": "ЕГРЮЛ: ООО «СтройМонтаж». S3: просрочки до 30 дней, сумма 20 млн — документы, затем ручная проверка",
+  "priority": 1,
+  "request": {
+    "method": "GET",
+    "urlPath": "/egrul/v1/companies/5003123458"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "bodyFileName": "egrul/5003123458.json"
+  }
+}

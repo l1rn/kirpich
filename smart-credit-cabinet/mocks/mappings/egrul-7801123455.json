@@ -1,0 +1,15 @@
+{
+  "name": "ЕГРЮЛ: ООО «Закат». S4: компания ликвидируется — стоп-фактор, автоотказ",
+  "priority": 1,
+  "request": {
+    "method": "GET",
+    "urlPath": "/egrul/v1/companies/7801123455"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "bodyFileName": "egrul/7801123455.json"
+  }
+}

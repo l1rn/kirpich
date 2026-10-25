@@ -1,0 +1,114 @@
+# Кредитная политика демо-банка. Цифры условные и упрощённые (см. README → «Допущения»),
+# продуктовая линейка — по исследованию discovery/products.md.
+# Политика вынесена в конфиг, чтобы риск-менеджер менял продукты и пороги без релиза кода.
+credit:
+  version: "2026.10-demo"
+
+  purposes:
+    - code: cash_gap
+      label: Закрыть кассовый разрыв или оплатить поставщикам
+    - code: working_capital
+      label: Регулярные закупки и пополнение оборота
+    - code: investment
+      label: Купить оборудование, транспорт или расширить бизнес
+    - code: other
+      label: Другие цели бизнеса
+
+  documents:
+    - code: financial_statement
+      label: Бухгалтерская отчётность за последний год
+    - code: bank_statement
+      label: Выписка по расчётному счёту за 6 месяцев
+    - code: other
+      label: Другой документ
+
+  products:
+    - code: OVERDRAFT
+      name: Овердрафт
+      description: Лимит на расчётном счёте — деньги списываются, когда своих не хватает
+      purposes: [cash_gap]
+      min-amount: 50000
+      max-amount: 20000000
+      min-term: 12
+      max-term: 12
+      base-rate: 26.0
+      revenue-ratio: 0.04   # ≈ половина месячной выручки
+      auto-approve-max: 5000000
+
+    - code: CREDIT_LINE
+      name: Кредитная линия
+      description: Берёте деньги частями, когда нужно, и платите проценты только за использованное
+      purposes: [working_capital, cash_gap]
+      min-amount: 1000000
+      max-amount: 30000000
+      min-term: 12
+      max-term: 36
+      base-rate: 23.5
+      revenue-ratio: 0.3
+      auto-approve-max: 10000000
+
+    - code: BUSINESS_CREDIT
+      name: Кредит на развитие
+      description: Разовая сумма на оборудование, ремонт и расширение бизнеса
+      purposes: [investment, working_capital, other]
+      min-amount: 300000
+      max-amount: 30000000
+      min-term: 12
+      max-term: 60
+      base-rate: 23.5
+      revenue-ratio: 0.5
+      auto-approve-max: 10000000
+      required-documents: [financial_statement]
+      documents-required-above: 10000000
+
+  scoring:
+    base-score: 50
+    # Минимальный балл для грейда и надбавка к ставке; ниже последнего грейда — D (отказ)
+    grades:
+      - {name: A, min-score: 75, rate-premium: 0.0}
+      - {name: B, min-score: 60, rate-premium: 1.5}
+      - {name: C, min-score: 45, rate-premium: 3.0}
+    max-payment-to-revenue: 0.4
+    revenue-mismatch-tolerance: 0.3
+    min-business-age-months: 3
+    stop-overdue-days: 90
+
+    factors:
+      - code: business_age
+        label: Возраст бизнеса
+        bands:
+          - {max: 11, points: -10, text: "меньше года"}
+          - {max: 35, points: 0, text: "от 1 до 3 лет"}
+          - {points: 10, text: "больше 3 лет"}
+      - code: amount_to_revenue
+        label: Сумма кредита к годовой выручке
+        bands:
+          - {max: 0.2, points: 15, text: "до 20%"}
+          - {max: 0.5, points: 5, text: "20–50%"}
+          - {max: 1.0, points: -10, text: "50–100%"}
+          - {points: -25, text: "больше 100%"}
+      - code: payment_to_revenue
+        label: Платежи по кредитам к месячной выручке
+        bands:
+          - {max: 0.2, points: 10, text: "до 20%"}
+          - {max: 0.4, points: 0, text: "20–40%"}
+          - {max: 0.6, points: -15, text: "40–60%"}
+          - {points: -30, text: "больше 60%"}
+      - code: credit_history
+        label: Кредитная история
+        values:
+          - {key: clean, points: 15, text: "без просрочек"}
+          - {key: none, points: 0, text: "кредитов не было"}
+          - {key: overdue_up_to_30, points: -10, text: "просрочки до 30 дней"}
+          - {key: overdue_30_90, points: -25, text: "просрочки 30–90 дней"}
+          - {key: overdue_90_plus, points: -40, text: "просрочки больше 90 дней"}
+      - code: tax_debt
+        label: Налоговая задолженность
+        values:
+          - {key: absent, points: 5, text: "нет"}
+          - {key: present, points: -15, text: "есть"}
+      - code: mass_registration
+        label: Массовый адрес или руководитель
+        values:
+          - {key: absent, points: 0, text: "нет"}
+          - {key: present, points: -10, text: "есть"}

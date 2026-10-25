@@ -1,0 +1,20 @@
+{
+  "inn": "7801123455",
+  "reportId": "BKI-7801123455-2026",
+  "generatedAt": "2026-10-20",
+  "loans": [
+    {
+      "creditor": "Банк Невский",
+      "type": "Овердрафт",
+      "amount": 1000000,
+      "openedAt": "2023-09-01",
+      "termMonths": 12,
+      "status": "active",
+      "outstanding": 900000,
+      "monthlyPayment": 95000,
+      "maxOverdueDays12m": 60,
+      "currentOverdueDays": 20
+    }
+  ],
+  "inquiries30d": 1
+}
