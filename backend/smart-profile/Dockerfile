@@ -13,7 +13,7 @@ workdir /app
 run useradd --system --no-create-home app \
     && mkdir /data && chown app /data
 
-copy --from build /app/app.jar app.jar
+copy --from=build /app/app.jar app.jar
 
 user app 
 volume /data

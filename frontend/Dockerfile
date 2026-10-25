@@ -7,7 +7,7 @@ run npm ci
 copy . .
 run npm run build-only
 
-from nginx:alping
+from nginx:alpine
 copy nginx.conf /etc/nginx/conf.d/default.conf
 copy --from=build /app/dist /usr/share/nginx/html
 expose 80

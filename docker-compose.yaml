@@ -16,6 +16,11 @@ services:
       - backend
     ports:
       - "80:80"
-
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost/"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
 volumes:
   backend-data:
+
